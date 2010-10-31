@@ -1,0 +1,8 @@
+
+    [deluge.plugin.core]
+    ManagedPause = managedpause:CorePlugin
+    [deluge.plugin.gtkui]
+    ManagedPause = managedpause:GtkUIPlugin
+    [deluge.plugin.web]
+    ManagedPause = managedpause:WebUIPlugin
+    

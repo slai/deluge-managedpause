@@ -1,0 +1,11 @@
+setup.py
+ManagedPause.egg-info/PKG-INFO
+ManagedPause.egg-info/SOURCES.txt
+ManagedPause.egg-info/dependency_links.txt
+ManagedPause.egg-info/entry_points.txt
+ManagedPause.egg-info/top_level.txt
+managedpause/__init__.py
+managedpause/common.py
+managedpause/core.py
+managedpause/gtkui.py
+managedpause/webui.py
