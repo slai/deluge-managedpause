@@ -114,7 +114,7 @@ class Core(CorePluginBase):
         # only apply the pause action to avoid interfering with the user option
         # 'add torrent as paused'
         if state == "Red":
-            log.debug("MANAGEDPAUSE [TORRENT ADDED]: paused new torrent, %s" % torrent.get_status(["name"])[0])
+            log.debug("MANAGEDPAUSE [TORRENT ADDED]: paused new torrent, %s" % torrent.get_status(["name"]))
             torrent.pause()
 
     def on_session_resumed(self):
