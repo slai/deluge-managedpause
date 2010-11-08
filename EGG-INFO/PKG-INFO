@@ -1,6 +1,6 @@
 Metadata-Version: 1.0
 Name: Managed Pause
-Version: 0.2
+Version: 0.3
 Summary: Pauses auto-managed torrents on a per-hour per-day basis.
 Home-page: http://deluge-torrent.org
 Author: Sam Lai
