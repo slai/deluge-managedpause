@@ -114,7 +114,7 @@ class Core(CorePluginBase):
         # only apply the pause action to avoid interfering with the user option
         # 'add torrent as paused'
         if state == "Red":
-            log.debug("MANAGEDPAUSE [TORRENT ADDED]: paused new torrent, %s" % torrent.get_status(["name"]))
+            log.debug("MANAGEDPAUSE [TORRENT ADDED]: paused new torrent, %s" % torrent.get_status(["name"]).get("name", "NO NAME"))
             torrent.pause()
 
     def on_session_resumed(self):
@@ -130,11 +130,17 @@ class Core(CorePluginBase):
         log.debug("MANAGEDPAUSE [SET STATE]: currently have %d torrents." % len(torrents))
         for t in torrents.values():
             log.debug("MANAGEDPAUSE [SET STATE]: %s, auto-managed %s, currently %s" % (t.filename, t.options["auto_managed"], t.state))
-            if t.options["auto_managed"] and (not self.config["ignore_seeding"] or t.state != "Seeding"):
-                if active: 
-                    t.resume()
-                else:
-                    t.pause()
+            if t.options["auto_managed"]:
+                # if we're not ignoring seeding, OR we are ignoring seeding and not ...
+                if not self.config["ignore_seeding"] or not (
+                    # seeding
+                    t.state == "Seeding" or
+                    # queued and completed, so just waiting to seed
+                    (t.state == "Queued" and t.get_status(["progress"]).get("progress", 0) >= 100)):
+                    if active: 
+                        t.resume()
+                    else:
+                        t.pause()
 
     def do_schedule(self, timer=True):
         """
